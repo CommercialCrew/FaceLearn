@@ -1,4 +1,4 @@
-# FaceLearn
+# OpenCV 기반 안면 마스크 프로그램 제작
 
 제목: OpenCV 기반 안면 마스크 프로그램 제작
 
