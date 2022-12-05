@@ -1,26 +1,9 @@
-# face-api.js 기반 안면 마스크 프로그램 제작
+# IMPORTANT: Bug Fixes
 
-# 계획서
-제목: face-api.js 기반 안면 마스크 프로그램 제작
+## `navigator.getUserMedia`
 
-요약: 보안, 회원관리, 사진 편집 등 다양한 방면에서 활용도가 높아 주목받고 있는 안면인식 기술의 기초가 되는 안면 마스크 프로그램을 제작한다.
+`navigator.getUserMedia` is now deprecated and is replaced by `navigator.mediaDevices.getUserMedia`. To fix this bug replace all versions of `navigator.getUserMedia` with `navigator.mediaDevices.getUserMedia`
 
-팀원:
-김성현 (20181106) - 프로그램 시연 및 결과 영상 제작
-이준성 (20191492) - 논문 작성
-이인건 (20191488) - 프로젝트 리플릿 제작
+## Low-end Devices Bug
 
-일정
-1주차: 프로젝트 목표 설정, 계획 수립 및 프로그램 코드 작성 착수
-2주차: 프로그램 코드 완성 및 테스트, 논문 작성
-3주차: 프로그램 시연/결과 영상 제작, 발표 준비
-4주차: 최종 발표
-
-예상 결과: 
-- 카메라를 통해 나온 영상에서 안면부를 제대로 인식하고 그 특징에 따라 마스크를 생성할 수 있다.
-
-- 생성한 마스크를 서버에 저장하고 이후 영상에서 제작된 마스크가 저장된 것과 얼마나 유사한지를 비교하고 유사도가 일정 이상이면 해당 인물로 판단한다.
-
-# 브레인 스토밍
-
-![KakaoTalk_20221115_093947771](https://user-images.githubusercontent.com/101386134/201898735-5eda55ed-423f-4883-b26d-e0bbc26cc3ef.jpg)
+The video eventListener for `play` fires up too early on low-end machines, before the video is fully loaded, which causes errors to pop up from the Face API and terminates the script (tested on Debian [Firefox] and Windows [Chrome, Firefox]). Replaced by `playing` event, which fires up when the media has enough data to start playing.
